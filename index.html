@@ -9,8 +9,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <title>ISBEP Demonstrator</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="elements/map-marker.js"></script>
+    <script src="elements/map-situation.js"></script>
 </head>
+<style>
+    #map-div {
+        margin: 30% 30% 30% 30%;
+    }
+
+    map-situation:not(:defined), map-marker:not(:defined) {
+        display: block; /* Specify the style of the undefined custom elements. */
+    } /* situation-width', 'situation-height', 'situation-left-position', 'situation-top-position'*/
+</style>
 <body>
-    <img src="images/Server-Simulation-Overview-Three-Rooms.PNG">
+    <div id="map-div">
+        <map-situation background-src="images/Server-Simulation-Overview-Three-Rooms.PNG" 
+        situation-width="4" situation-height="2.3" situation-left-position="-2" situation-top-position="-0.5">
+            <map-marker icon-src="images/robot-icon.png" x-position="0.7" z-position="0"></map-marker>
+            <map-marker icon-src="images/robot-icon.png" x-position="0" z-position="0"></map-marker>
+            <map-marker icon-src="images/robot-icon.png" x-position="-0.7" z-position="0"></map-marker>
+        </map-situation>
+    </div>
 </body>
 </html>
