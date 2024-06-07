@@ -5,11 +5,10 @@ class DataReceiver extends HTMLElement {
 
     /* Called when element is added to the document. */
     connectedCallback() {
-        this._receiveDataBroadcaster.bind(this);
         this._defaultAttribute('host-address', 'ws://localhost:8080');
         this.addEventListener('load', function(event) {
-            _addConnection();
-        });
+            this._addConnection();
+        }.bind(this));
     }
 
     _defaultAttribute(attribute, value) {
@@ -47,7 +46,9 @@ class DataReceiver extends HTMLElement {
             console.log("data-receiver connection opened.")
         };
 
-        this.socket.onmessage = this._receiveDataBroadcaster;
+        this.socket.onmessage = function(event) {
+            this._receiveDataBroadcaster(event);
+        }.bind(this);
 
         this.socket.onclose = function(event) {
             console.log("data-receiver connection closed.")
@@ -59,7 +60,6 @@ class DataReceiver extends HTMLElement {
     }
 
     _receiveDataBroadcaster(event) {
-        console.log(`Received data: ${event.data}`)
         this.dispatchEvent(new CustomEvent("receivedata", {
             detail: event.data
         }));

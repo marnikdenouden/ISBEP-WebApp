@@ -25,7 +25,7 @@ map_situation_template.innerHTML = `
 
 class MapSituation extends HTMLElement {
     constructor() {
-        self = super();
+        super();
         console.log("constructor");
 
         const shadowRoot = this.attachShadow({mode:'closed'});

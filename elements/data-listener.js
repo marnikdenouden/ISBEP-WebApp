@@ -5,14 +5,23 @@ class DataListener extends HTMLElement {
             throw new Error("Class is of abstract type and can't be instantiated");
         };
 
-        if(this.receiveDataHandler == undefined) {
+        if(this._receiveDataHandler == undefined) {
             throw new Error("receiveData method must be implemented");
         };
     }
   
     /* Called when element is added to the document. */
     connectedCallback() {
-        this._eventListener.bind(this);
+        this._receiveDataHandler.bind(this);
+        this._eventHandler = (event) => {
+            try {
+                let data = JSON.parse(event.detail);
+                this._receiveDataHandler(data)
+            } catch (error) {
+                console.log("Could not parse data as JSON \n" +
+                            `Data: ${event.detail} \n Error: ${error}`);
+            }
+        };
         this._updateDataListener();
     }
   
@@ -41,14 +50,9 @@ class DataListener extends HTMLElement {
      * 
      * @param {JSON} data received from receive data event.
      */
-    receiveDataHandler(data) {
+    _receiveDataHandler(data) {
         console.log(`Received data: ${data}`)
         throw new Error("receiveData method is not implemented.");
-    }
-
-    _eventListener(event) {
-        console.log(`Received data event: ${event}`)
-        this.receiveDataHandler(event.detail);
     }
 
     _updateDataListener() {
@@ -70,12 +74,12 @@ class DataListener extends HTMLElement {
         this._removeDataListener();
         console.log("Adding data listener");
         this.receiver = receiver;
-        this.receiver.addEventListener('receivedata', this._eventListener);
+        this.receiver.addEventListener('receivedata', this._eventHandler);
     }
 
     _removeDataListener() {
         console.log("Removing data listener");
         if (this.receiver == null) return;
-        this.receiver.removeEventListener('receivedata', this._eventListener);
+        this.receiver.removeEventListener('receivedata', this._eventHandler);
     }
 }

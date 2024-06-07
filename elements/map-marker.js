@@ -89,7 +89,11 @@ class MapMarker extends DataListener {
     }
 
     _receiveDataHandler(data) {
-        console.log(`receiveDataHandler: ${data}`);
+        if (!this.hasAttribute('serial-number')) return;
+        if (data['serialNumber'] != this.getAttribute('serial-number')) return;
+
+        this.setAttribute('x-position', data['position']['x']);
+        this.setAttribute('z-position', data['position']['z']);
     }
 
 }
