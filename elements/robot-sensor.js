@@ -40,7 +40,9 @@ class RobotSensor extends DataListener {
         
         if (!this.hasAttribute('sensor-key')) return;
 
-        this.innerText(data['sensor'][this.getAttribute('sensor-key')]);
+        if (!this.getAttribute('sensor-key') in data) return;
+        
+        this.innerText(data[this.getAttribute('sensor-key')]);
     }
 
 }

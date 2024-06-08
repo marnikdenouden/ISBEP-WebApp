@@ -92,8 +92,15 @@ class MapMarker extends DataListener {
         if (!this.hasAttribute('serial-number')) return;
         if (data['serial'] != this.getAttribute('serial-number')) return;
 
-        this.setAttribute('x-position', data['position']['x']);
-        this.setAttribute('z-position', data['position']['z']);
+        if (! 'position' in data) return;
+        let position = data['position'];
+
+        if ('x' in position) {
+            this.setAttribute('x-position', position['x']);
+        }
+        if ('z' in position) {
+            this.setAttribute('z-position', position['z']);
+        }
     }
 
 }
