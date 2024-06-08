@@ -13,6 +13,7 @@
     <script src="elements/data-listener.js"></script>
     <script src="elements/map-marker.js"></script>
     <script src="elements/map-situation.js"></script>
+    <script src="elements/robot-sensor.js"></script>
 </head>
 <style>
     #map-div {
@@ -26,12 +27,13 @@
 <body>
     <data-receiver id="data-receiver" host-address="ws://localhost:8080"></data-receiver>
     <div id="map-div">
-        <map-situation background-src="images/Server-Simulation-Overview-Three-Rooms.PNG" 
+        <map-situation background-src="images/robot_map.png" 
         situation-width="-5.26" situation-height="3.5137" situation-left-position="2.614" situation-top-position="-0.8537">
             <map-marker icon-src="images/robot_0.png" receiver-id="data-receiver" serial-number='00000000' x-position="0.7" z-position="0"></map-marker>
             <map-marker icon-src="images/robot_1.png" receiver-id="data-receiver" serial-number='00000001' x-position="0" z-position="0"></map-marker>
             <map-marker icon-src="images/robot_2.png" receiver-id="data-receiver" serial-number='00000002' x-position="-0.7" z-position="0"></map-marker>
         </map-situation>
     </div>
+    <robot-sensor serial-number='00000000' sensor-key="temp"></robot-sensor>
 </body>
 </html>
