@@ -35,6 +35,8 @@ class RobotSensor extends DataListener {
     }
 
     _receiveDataHandler(data) {
+        if (typeof(data) != 'object') return;
+
         if (!this.hasAttribute('serial-number')) return;
         
         if (! 'serial' in data) return;
@@ -42,6 +44,8 @@ class RobotSensor extends DataListener {
 
         if (! 'sensor' in data) return;
         let sensor_data = data['sensor'];
+        
+        if (typeof(sensor_data) != 'object') return;
 
         if (!this.hasAttribute('sensor-key')) return;
 
@@ -52,7 +56,7 @@ class RobotSensor extends DataListener {
         if (typeof value == "number") {
             value = value.toFixed(this.getAttribute("rounding") ?? 2);
         }
-        
+
         this.innerText = value;
     }
 

@@ -87,9 +87,7 @@ class MapSituation extends HTMLElement {
         console.log(`attributeChangedCallback ${name}`);
         switch(name) {
             case 'background-src':
-                // if (this._backgroundImage != null) {
-                    this._backgroundImage.src = newValue;
-                // }
+                this._backgroundImage.src = newValue;
                 break;
             case 'situation-width':
             case 'situation-height':
