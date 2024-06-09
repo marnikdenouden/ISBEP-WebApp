@@ -14,13 +14,14 @@ class DataListener extends HTMLElement {
     connectedCallback() {
         this._receiveDataHandler.bind(this);
         this._eventHandler = (event) => {
+            let data;
             try {
-                let data = JSON.parse(event.detail);
-                this._receiveDataHandler(data)
+                data = JSON.parse(event.detail);
             } catch (error) {
                 console.log("Could not parse data as JSON \n" +
                             `Data: ${event.detail} \n Error: ${error}`);
             }
+            this._receiveDataHandler(data);
         };
         this._updateDataListener();
     }

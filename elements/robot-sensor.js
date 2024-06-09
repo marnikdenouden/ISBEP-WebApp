@@ -36,13 +36,24 @@ class RobotSensor extends DataListener {
 
     _receiveDataHandler(data) {
         if (!this.hasAttribute('serial-number')) return;
-        if (data['serial'] != this.getAttribute('serial-number')) return;
         
+        if (! 'serial' in data) return;
+        if (data['serial'] != this.getAttribute('serial-number')) return;
+
+        if (! 'sensor' in data) return;
+        let sensor_data = data['sensor'];
+
         if (!this.hasAttribute('sensor-key')) return;
 
-        if (!this.getAttribute('sensor-key') in data) return;
+        if (!this.getAttribute('sensor-key') in sensor_data) return;
+
+        let value =  sensor_data[this.getAttribute('sensor-key')];
         
-        this.innerText(data[this.getAttribute('sensor-key')]);
+        if (typeof value == "number") {
+            value = value.toFixed(this.getAttribute("rounding") ?? 2);
+        }
+        
+        this.innerText = value;
     }
 
 }

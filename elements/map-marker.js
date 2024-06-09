@@ -90,6 +90,7 @@ class MapMarker extends DataListener {
 
     _receiveDataHandler(data) {
         if (!this.hasAttribute('serial-number')) return;
+        if (! 'serial' in data) return;
         if (data['serial'] != this.getAttribute('serial-number')) return;
 
         if (! 'position' in data) return;
