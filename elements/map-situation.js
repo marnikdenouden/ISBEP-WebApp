@@ -26,7 +26,6 @@ map_situation_template.innerHTML = `
 class MapSituation extends HTMLElement {
     constructor() {
         super();
-        console.log("constructor");
 
         const shadowRoot = this.attachShadow({mode:'closed'});
 
@@ -39,8 +38,6 @@ class MapSituation extends HTMLElement {
 
     /* Called when element is added to the document. */
     connectedCallback() {
-        console.log("connectedCallback");
-
         this._defaultAttribute('situation-width', 1);
         this._defaultAttribute('situation-height', 1);
         this._defaultAttribute('situation-left-position', -0.5);
@@ -70,7 +67,6 @@ class MapSituation extends HTMLElement {
   
     /* Called when element is removed from the document. */
     disconnectedCallback() {
-        console.log("disconnectedCallback");
         this._backgroundImage.removeEventListener('load', this._updateMapImageRatio);
         this.removeEventListener('load', this._updateMarkerPositions);
         this._mapMarkerSlot.removeEventListener('slotchange', this._onSlotChange);
@@ -84,7 +80,6 @@ class MapSituation extends HTMLElement {
   
     /* Called when an attributed has changed. */
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log(`attributeChangedCallback ${name}`);
         switch(name) {
             case 'background-src':
                 this._backgroundImage.src = newValue;
@@ -106,12 +101,10 @@ class MapSituation extends HTMLElement {
     }
 
     _updateMapImageRatio() {
-        console.log("updateMapImageRatio");
         this.style.aspectRatio = `${this._backgroundImage.naturalWidth}/${this._backgroundImage.naturalHeight}`;
     }
 
     _createBackgroundImage() {
-        console.log("createBackgroundImage");
         this._backgroundImage = document.createElement('img');
         this._backgroundImage.classList += 'map-area';
         return this._backgroundImage;
@@ -122,7 +115,6 @@ class MapSituation extends HTMLElement {
     }
     
     _updateMarkerPositions() {
-        console.log("updateMarkerPositions");
         const markers = this._allMarkers();
         markers.forEach((marker) => {
             this._updateMarkerXPosition(marker);
@@ -158,5 +150,4 @@ class MapSituation extends HTMLElement {
             / Number(this.getAttribute('situation-height'))) * 100}%`);
     }
 }
-console.log("DefineMapSituation");
 customElements.define("map-situation", MapSituation);

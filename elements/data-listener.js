@@ -52,15 +52,12 @@ class DataListener extends HTMLElement {
      * @param {JSON} data received from receive data event.
      */
     _receiveDataHandler(data) {
-        console.log(`Received data: ${data}`)
         throw new Error("receiveData method is not implemented.");
     }
 
     _updateDataListener() {
-        console.log("Updating data listener");
-
         if (!this.hasAttribute('receiver-id')) {
-            console.info("Data listener does not have receiver-id set.");
+            console.warn("Data listener does not have receiver-id set.");
             return;
         }
 
@@ -73,13 +70,11 @@ class DataListener extends HTMLElement {
         }
         
         this._removeDataListener();
-        console.log("Adding data listener");
         this.receiver = receiver;
         this.receiver.addEventListener('receivedata', this._eventHandler);
     }
 
     _removeDataListener() {
-        console.log("Removing data listener");
         if (this.receiver == null) return;
         this.receiver.removeEventListener('receivedata', this._eventHandler);
     }
