@@ -55,7 +55,7 @@ In order to try out the example that functioned as part of the demonstrator foll
 - [1] Clone [this](https://github.com/marnikdenouden/ISBEP-WebApp) repository locally using [Git](https://git-scm.com), for example by [Git clone command](#git-clone-command)
 - [2] Ensure all [dependencies](#dependencies) are present
 - [3] Open command prompt terminal in the local repository folder
-- [4] Run [command](#run-web-socket-server-with-node.js) to execute web socket server script with [Node.js](https://nodejs.org/en/)
+- [4] Run [command](#run-web-socket-server-with-nodejs) to execute web socket server script with [Node.js](https://nodejs.org/en/)
 - [5] Send [start command](#start-command) in server terminal
 - [6] Click the [index.html](index.html) to start the web app
 - [7] Send [broadcast command](#broadcast-command) in server terminal
@@ -75,6 +75,7 @@ In order to try out the example that functioned as part of the demonstrator foll
 
 #### Example position data
     {"serial": "00000000", "position": {"x": -0.5313510894775391, "y": 0.03349997103214264, "z": 0.7212914824485779}}
+
 #### Example sensor data
     {"serial": "00000000", "sensor": {"temp":112.8743, "co":0.3927944, "ch4":0.5296978, "pressure":100.46093, "humid":18.7352333, "flow":1.67795694}}
 
