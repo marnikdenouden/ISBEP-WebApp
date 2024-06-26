@@ -57,6 +57,7 @@ class RobotSensor extends DataListener {
             value = value.toFixed(this.getAttribute("rounding") ?? 2);
         }
 
+        this.setAttribute('value', value);
         this.innerText = value;
     }
 
