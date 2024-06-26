@@ -3,39 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Inter from font google api -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <title>ISBEP Demonstrator</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>ISBEP - WebApp</title>
     <script src="elements/data-receiver.js"></script>
     <script src="elements/data-listener.js"></script>
+    <script src="elements/robot-listener.js"></script>
+    <script src="elements/robot-receiver.js"></script>
     <script src="elements/map-marker.js"></script>
     <script src="elements/map-situation.js"></script>
     <script src="elements/robot-sensor.js"></script>
     <script src="elements/robot-camera.js"></script>
 </head>
-<style>
-    #map-div {
-        margin: 10% 10% 10% 10%;
+<script>
+    function connectRobotMarkersToPage() {
+        let map_markers = document.getElementsByTagName('map-marker');
+        for (let map_marker of map_markers) {
+            const serial_number = map_marker.getAttribute('serial-number')
+            const marker_icons = map_marker.getElementsByClassName("marker-icon");
+            map_marker.getMarkerIconElement()
+            .setAttribute('onclick', `setPageRobot(${serial_number})`);
+        }
     }
 
-    map-situation:not(:defined), map-marker:not(:defined) {
-        display: block; /* Specify the style of the undefined custom elements. */
-    } /* situation-width', 'situation-height', 'situation-left-position', 'situation-top-position'*/
-</style>
-<body>
-    <data-receiver id="data-receiver" host-address="ws://localhost:8080"></data-receiver>
-    <div id="map-div">
-        <map-situation background-src="images/robot_map.png" 
-        situation-width="-5.26" situation-height="3.5137" situation-left-position="2.614" situation-top-position="-0.8537">
-            <map-marker icon-src="images/robot_0.png" receiver-id="data-receiver" serial-number='00000000' x-position="0.7" z-position="0"></map-marker>
-            <map-marker icon-src="images/robot_1.png" receiver-id="data-receiver" serial-number='00000001' x-position="0" z-position="0"></map-marker>
-            <map-marker icon-src="images/robot_2.png" receiver-id="data-receiver" serial-number='00000002' x-position="-0.7" z-position="0"></map-marker>
-        </map-situation>
-    </div>
-    <robot-sensor receiver-id="data-receiver" serial-number='00000000' sensor-key="temp"></robot-sensor>
-    <robot-camera receiver-id="data-receiver" serial-number='00000000'></robot-camera>
-</body>
+    function getRobotColor(serial_number) {
+        switch(serial_number) {
+            case 0: return "red";
+            case 1: return "green";
+            case 2: return "blue";
+            default: return "white";
+        }
+    }
+
+    function setPageRobot(serial_number) {
+        document.getElementById("page-robot-receiver").setAttribute('serial-number', "0000000" + serial_number);
+        document.body.style.backgroundColor = getRobotColor(serial_number);
+    }
+
+</script>
+</head>
+    <body onload="connectRobotMarkersToPage()">
+        <div class="robot-overview" id="page-background">
+        <data-receiver id="data-receiver" host-address="ws://localhost:5633"></data-receiver>
+        <robot-receiver serial-number="00000000" id="page-robot-receiver" receiver-id="data-receiver"></data-receiver>
+            <div class="div">
+            <div class="rectangle">
+                <robot-camera receiver-id="page-robot-receiver" ></robot-camera>
+            </div>
+            <div class="backend-banner">
+                <div class="frame">
+                    <div class="frame-2">
+                        <div class="frame-3">
+                            <div class="element-wrapper">
+                                <div class="element"><robot-sensor receiver-id="page-robot-receiver" 
+                                    sensor-key="co">793</robot-sensor> ppm</div>
+                                </div>
+                            <div class="life-time-courses">Carbon monoxide level</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="frame-wrapper">
+                <div class="frame">
+                    <div class="frame-2">
+                        <div class="frame-3">
+                            <div class="element-wrapper">
+                                <div class="element"><robot-sensor receiver-id="page-robot-receiver" 
+                                    sensor-key="temp">48</robot-sensor> °C </div>
+                            </div>
+                            <div class="life-time-courses">Temperature</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="div-wrapper">
+                <div class="frame">
+                    <div class="frame-2">
+                        <div class="frame-3">
+                            <div class="element-wrapper">
+                                <div class="element"><robot-sensor receiver-id="page-robot-receiver" 
+                                    sensor-key="humid">4</robot-sensor>%</div>
+                            </div>
+                            <div class="life-time-courses">Humidity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="backend-banner-2">
+                <div class="frame">
+                    <div class="frame-2">
+                        <div class="frame-3">
+                            <div class="element-wrapper">
+                                <div class="element"><robot-sensor receiver-id="page-robot-receiver" 
+                                    sensor-key="ch4">0</robot-sensor> %</div>
+                                </div>
+                            <div class="life-time-courses">Methane level</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="backend-banner-3">
+                <div class="frame">
+                    <div class="frame-2">
+                        <div class="frame-3">
+                            <div class="element-wrapper">
+                                <div class="element"><robot-sensor receiver-id="page-robot-receiver" 
+                                    sensor-key="pressure">105</robot-sensor> kPa </div>
+                                </div>
+                            <div class="life-time-courses">Atmospheric pressure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlap-group"><img class="settings" src="img/settings-1.svg" /></div>
+            <div class="frame-4">
+                <map-situation background-src="images/robot_map.png" 
+                    situation-width="-5.26" situation-height="3.5137" 
+                    situation-left-position="2.614" situation-top-position="-0.8537">
+                    <map-marker icon-src="images/robot_0.png" receiver-id="data-receiver" serial-number="00000000" x-position="0.7" z-position="0"></map-marker>
+                    <map-marker icon-src="images/robot_1.png" receiver-id="data-receiver" serial-number="00000001" x-position="0" z-position="0"></map-marker>
+                    <map-marker icon-src="images/robot_2.png" receiver-id="data-receiver" serial-number="00000002" x-position="-0.7" z-position="0"></map-marker>
+                </map-situation>
+            </div>
+                <div class="backend-banner-4">
+                    <div class="frame">
+                        <div class="frame-2">
+                            <div class="frame-3">
+                                    <div class="element-wrapper">
+                                        <div class="element"><robot-sensor receiver-id="page-robot-receiver" 
+                                            sensor-key="flow">2.7</robot-sensor> m/s</div>
+                                </div>
+                            <div class="life-time-courses">Speed of airflow</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <img class="bell" src="img/bell-1.svg" />
+            </div>
+        </div>
+    </body>
 </html>
