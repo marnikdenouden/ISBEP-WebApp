@@ -1,4 +1,4 @@
-class RobotSensor extends DataListener {
+class RobotSensor extends RobotListener {
     constructor() {
         super();
     }
@@ -6,7 +6,6 @@ class RobotSensor extends DataListener {
     /* Called when element is added to the document. */
     connectedCallback() {
         super.connectedCallback();
-        this._defaultAttribute('serial-number', '00000000');
         this._defaultAttribute('sensor-key', 'temp');
     }
 
@@ -34,16 +33,9 @@ class RobotSensor extends DataListener {
           }
     }
 
-    _receiveDataHandler(data) {
-        if (typeof(data) != 'object') return;
-
-        if (!this.hasAttribute('serial-number')) return;
-        
-        if (! 'serial' in data) return;
-        if (data['serial'] != this.getAttribute('serial-number')) return;
-
-        if (! 'sensor' in data) return;
-        let sensor_data = data['sensor'];
+    _receiveRobotDataHandler(robot_data) {
+        if (! 'sensor' in robot_data) return;
+        let sensor_data = robot_data['sensor'];
         
         if (typeof(sensor_data) != 'object') return;
 

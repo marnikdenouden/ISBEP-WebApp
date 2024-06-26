@@ -21,7 +21,7 @@ robot_camera_template.innerHTML = `
     </style>
 `;
 
-class RobotCamera extends DataListener {
+class RobotCamera extends RobotListener {
     constructor() {
         super();
         
@@ -33,7 +33,6 @@ class RobotCamera extends DataListener {
     /* Called when element is added to the document. */
     connectedCallback() {
         super.connectedCallback();
-        this._defaultAttribute('serial-number', '00000000');
         this._defaultAttribute('camera-key', 'camera_image');
     }
 
@@ -67,19 +66,12 @@ class RobotCamera extends DataListener {
         return this.canvas;
     }
 
-    _receiveDataHandler(data) {
-        if (typeof(data) != 'object') return;
-
-        if (!this.hasAttribute('serial-number')) return;
-        
-        if (! 'serial' in data) return;
-        if (data['serial'] != this.getAttribute('serial-number')) return;
-
+    _receiveRobotDataHandler(robot_data) {
         if (!this.hasAttribute('camera-key')) return;
 
-        if (!this.getAttribute('camera-key') in data) return;
+        if (!this.getAttribute('camera-key') in robot_data) return;
 
-        let frameData =  data[this.getAttribute('camera-key')];
+        let frameData =  robot_data[this.getAttribute('camera-key')];
         
         const img = new Image();
         img.src = 'data:image/png;base64,' + frameData;

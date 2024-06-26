@@ -23,7 +23,7 @@ map_marker_template.innerHTML = `
     </style>
 `;
 
-class MapMarker extends DataListener {
+class MapMarker extends RobotListener {
     constructor() {
         super();
 
@@ -88,16 +88,9 @@ class MapMarker extends DataListener {
         return this.iconImage;
     }
 
-    _receiveDataHandler(data) {
-        if (typeof(data) != 'object') return;
-
-        if (!this.hasAttribute('serial-number')) return;
-
-        if (! 'serial' in data) return;
-        if (data['serial'] != this.getAttribute('serial-number')) return;
-
-        if (! 'position' in data) return;
-        let position = data['position'];
+    _receiveRobotDataHandler(robot_data) {
+        if (! 'position' in robot_data) return;
+        let position = robot_data['position'];
         
         if (typeof(position) != 'object') return;
 
@@ -107,6 +100,10 @@ class MapMarker extends DataListener {
         if ('z' in position) {
             this.setAttribute('z-position', position['z']);
         }
+    }
+
+    getMarkerIconElement() {
+        return this.iconImage;
     }
 
 }

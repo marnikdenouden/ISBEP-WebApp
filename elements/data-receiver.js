@@ -6,6 +6,7 @@ class DataReceiver extends HTMLElement {
     /* Called when element is added to the document. */
     connectedCallback() {
         this._defaultAttribute('host-address', 'ws://localhost:8080');
+        this._receiveDataBroadcaster.bind(this);
         this.addEventListener('load', function(event) {
             this._addConnection();
         }.bind(this));
@@ -60,8 +61,15 @@ class DataReceiver extends HTMLElement {
     }
 
     _receiveDataBroadcaster(event) {
+        let data;
+        try {
+            data = JSON.parse(event.data);
+        } catch (error) {
+            console.log("Could not parse data as JSON \n" +
+                        `Data: ${event.detail} \n Error: ${error}`);
+        }
         this.dispatchEvent(new CustomEvent("receivedata", {
-            detail: event.data
+            detail: data
         }));
     }
 

@@ -6,7 +6,7 @@ class DataListener extends HTMLElement {
         };
 
         if(this._receiveDataHandler == undefined) {
-            throw new Error("receiveData method must be implemented");
+            throw new Error("_receiveRobotDataHandler method must be implemented");
         };
     }
   
@@ -14,14 +14,7 @@ class DataListener extends HTMLElement {
     connectedCallback() {
         this._receiveDataHandler.bind(this);
         this._eventHandler = (event) => {
-            let data;
-            try {
-                data = JSON.parse(event.detail);
-            } catch (error) {
-                console.log("Could not parse data as JSON \n" +
-                            `Data: ${event.detail} \n Error: ${error}`);
-            }
-            this._receiveDataHandler(data);
+            this._receiveDataHandler(event.detail);
         };
         this._updateDataListener();
     }
@@ -52,7 +45,7 @@ class DataListener extends HTMLElement {
      * @param {JSON} data received from receive data event.
      */
     _receiveDataHandler(data) {
-        throw new Error("receiveData method is not implemented.");
+        throw new Error("_receiveDataHandler method is not implemented.");
     }
 
     _updateDataListener() {
