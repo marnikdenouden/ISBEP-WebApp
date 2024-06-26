@@ -3,7 +3,7 @@ ISBEP WebApp Elements
 
  - [Overview](#overview)
  - [Custom HTML elements](#custom-html-elements)
- - [Example](#example-webapp)
+ - [Example WebApp](#example-webapp)
  - [Dependencies](#dependencies)
 
 -----------------------------
