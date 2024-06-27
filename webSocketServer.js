@@ -157,9 +157,8 @@ class WebSocketServer {
     start() {
         this.stop(); // In case we already have a websocket sever running.
 
-
         console.log(`Starting webSocketServer at port ${port}`);
-        this.webSocketServer = new WebSocket.Server({ port: port});
+        this.webSocketServer = new WebSocket.Server({ port: port });
         
         // Add reference to self to use in functions.
         let self = this;
