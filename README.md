@@ -9,7 +9,7 @@ ISBEP WebApp Elements
 -----------------------------
 
 # Overview
-Web application for the Innovation Space Bachelor End Project (ISBEP)
+Web application elements for the Innovation Space Bachelor End Project (ISBEP)
 
 # Custom HTML elements
 Custom HTML elements in this repository allow robot data received from the [ISBEP-Server](https://github.com/marnikdenouden/ISBEP-Server) to be dynamically displayed in a web app interface. The scripts are easily added and integrated into existing displays, as is shown with the [example web app](#example-webapp) in this repository. The custom elements are fully writen in pure javascript and do not require any additional frameworks, thus allowing them to be integrated directly into any HTML site.
