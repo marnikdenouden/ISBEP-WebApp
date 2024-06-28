@@ -52,7 +52,7 @@ The Robot-Sensor element is a Robot-Listener that can display a value, which is 
 # Example WebApp
 In order to try out the example that functioned as part of the demonstrator follow the next steps.
 
-- [1] Clone [this](https://github.com/marnikdenouden/ISBEP-WebApp) repository locally using [Git](https://git-scm.com), for example by [Git clone command](#git-clone-command)
+- [1] Clone [this]() repository locally using [Git](https://git-scm.com), for example by [Git clone command](#git-clone-command)
 - [2] Ensure all [dependencies](#dependencies) are present
 - [3] Open command prompt terminal in the local repository folder
 - [4] Run [command](#run-web-socket-server-with-nodejs) to execute web socket server script with [Node.js](https://nodejs.org/en/)
