@@ -86,4 +86,5 @@ The example web app interface as defined by the [index.html](index.html), [style
 The example web app uses [Node.js](https://nodejs.org/en/) in order to make a web socket server, while the [custom HTML elements](#custom-html-elements) use the browser accepted [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) for a web socket connection as a client. The server requires [Node.js](https://nodejs.org/en/) for using the [ws module](https://github.com/websockets/ws).
 
 ## Local requirements
-- Download and install [Node.js](https://nodejs.org/en/download/)
+Download and install the following software.
+- [Node.js](https://nodejs.org/en/download/)
