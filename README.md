@@ -12,41 +12,41 @@ ISBEP WebApp Elements
 Web application elements for the Innovation Space Bachelor End Project ([ISBEP](https://studiegids.tue.nl/opleidingen/innovation-space/bachelor/isbep-innovation-space-bachelor-end-project))
 
 # Custom HTML elements
-Custom HTML elements in this repository allow robot data received from the [ISBEP-Server](https://github.com/marnikdenouden/ISBEP-Server) to be dynamically displayed in a web app interface. The scripts are easily added and integrated into existing displays, as is shown with the [example web app](#example-webapp) in this repository. The custom elements are fully writen in pure javascript and do not require any additional frameworks, thus allowing them to be integrated directly into any HTML site.
+Custom HTML elements in this repository allow robot data received from the [ISBEP-Server](https://github.com/marnikdenouden/ISBEP-Server) to be dynamically displayed in a web app interface. The scripts are easily added and integrated into existing displays, as is shown with the [example web app](#example-webapp) in this repository. The custom elements are fully written in pure javascript and do not require any additional frameworks, thus allowing them to be integrated directly into any HTML site.
 
 <details><summary>Data-Receiver</summary>
 <br><blockquote>
-The Data-Receiver element makes a websocket client connection to receive data. The element uses its defined host-address attribute to know where to check for the web socket server. After establishing a connection the Data-Receiver will emit a custom event named 'receivedata' that contains the received data.
+The data receiver element makes a websocket client connection to receive data. The element uses its defined host-address attribute to know where to check for the web socket server. After establishing a connection the data receiver will emit a custom event named 'receivedata' that contains the received data.
 </blockquote></details>
 
 <details><summary>Data-Listener</summary>
 <br><blockquote>
-The Data-Listener element is linked to a Data-Receiver using the receiver-id attribute, which should represent the id attribute of the Data-Receiver element. When the 'receivedata' event occurs the Data-Listener will call the classes _receiveDataHandler() method, which a custom HTML element that extends the Data-Listener class should implement.
+The data listener element is linked to a data receiver using the receiver-id attribute, which should represent the id attribute of the data receiver element. When the 'receivedata' event occurs the data listener will call the classes _receiveDataHandler() method, which a custom HTML element that extends the data listener class should implement.
 </blockquote></details>
 
 <details><summary>Robot-Receiver and Robot-Listener</summary>
 <br><blockquote>
-The Robot-Receiver and Robot-Listener elements extend the functionality of the data listener and receiver by filtering for a specific robot. These elements utilize the custom serial-number attribute to specify what robot to filter for. Therefore the robot receiver and listener will only emit the 'receivedata' event and call the _receiveDataHandler() method respectively when either the serial tag in the root of a JSON object does not exists or matches the specified number in the serial-number attribute.
+The robot receiver and robot listener elements extend the functionality of the data listener and receiver by filtering for a specific robot. These elements utilize the custom serial-number attribute to specify what robot to filter for. Therefore the robot receiver and listener will only emit the 'receivedata' event and call the _receiveDataHandler() method respectively when either the serial tag in the root of a JSON object does not exists or matches the specified number in the serial-number attribute.
 </blockquote></details>
 
 <details><summary>Map-Situation</summary>
 <br><blockquote>
-The Map-Situation element provides a way to specify an area in which markers can be displayed with a specific position. Inside the Map-Situation element Map-Markers can be specified. The map can use the background-src attribute to specify what the background image should be and the situation-width, situation-heigth, situation-left-position and situation-top-position attributes to specify what area the map image represents. 
+The map situation element provides a way to specify an area in which markers can be displayed with a specific position. Inside the map situation element map markers can be specified. The map can use the background-src attribute to specify what the background image should be and the situation-width, situation-height, situation-left-position and situation-top-position attributes to specify what area the map image represents. 
 </blockquote></details>
 
 <details><summary>Map-Marker</summary>
 <br><blockquote>
-The Map-Marker element can represent robot in an area defined by a Map-Situation parent. The Map-Marker is a Robot-Listener with additional attributes that can specify the display icon (icon-src), horizontal position (x-position), and vertical position (z-position) of the marker. 
+The map marker element can represent robot in an area defined by a map situation parent. The map marker is a robot listener with additional attributes that can specify the display icon (icon-src), horizontal position (x-position), and vertical position (z-position) of the marker. 
 </blockquote></details>
 
 <details><summary>Robot-Sensor</summary>
 <br><blockquote>
-The Robot-Sensor element is a Robot-Listener that can display a value, which is also accesible as attribute, received from JSON data for a specified sensor key. The sensor-key attribute specifies for what key to recreive a value from a sensor named dictionary in the received robot data.
+The robot sensor element is a robot listener that can display a value, which is also accessible as attribute, received from JSON data for a specified sensor key. The sensor-key attribute specifies for what key to recreive a value from a sensor named dictionary in the received robot data.
 </blockquote></details>
 
 <details><summary>Robot-Camera</summary>
 <br><blockquote>
- The Robot-Camera element is a Robot-Listener that retrieves and display an image element from data at the camera-key attribute location in received robot data.
+ The robot camera element is a robot listener that retrieves and display an image element from data at the camera-key attribute location in received robot data.
 </blockquote></details>
 
 # Example WebApp
